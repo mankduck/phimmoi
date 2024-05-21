@@ -1,9 +1,13 @@
 <?php
 
-use App\Http\Controllers\Api\V1\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
+// Auth
+use App\Http\Controllers\Api\V1\AuthController;
+// DanhMuc
+use App\Http\Controllers\Api\DanhMuc\DanhMucController;
+// DanhMuc
+use App\Http\Controllers\Api\TheLoai\TheLoaiController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -20,3 +24,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('/auth/login', [AuthController::class, 'login']);
+
+// Api Danh mục
+Route::prefix('/danhmuc')->group(function () {
+    Route::post('', [DanhMucController::class, 'index']);
+});
+
+// Api Thể loại
+Route::prefix('/theloai')->group(function () {
+    Route::post('', [TheLoaiController::class, 'index']);
+});

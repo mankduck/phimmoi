@@ -11,9 +11,11 @@ class TheLoai extends Model
 
     protected $table = 'the_loai';
     
-    protected $fillable = [
-        'ten_the_loai',
-        'trang_thai',
-        'mo_ta',
-    ];
+    protected $guarded = [];
+    
+    // protected $fillable = [
+    //     'ten_the_loai',
+    //     'trang_thai',
+    //     'mo_ta',
+    // ];
 }

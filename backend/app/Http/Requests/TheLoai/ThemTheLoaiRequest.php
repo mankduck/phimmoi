@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\DanhMuc;
+namespace App\Http\Requests\TheLoai;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ThemDanhMucRequest extends FormRequest
+class ThemTheLoaiRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,7 +22,7 @@ class ThemDanhMucRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'ten_danh_muc' => 'required|unique:danh_muc',
+            'ten_the_loai' => 'required|unique:the_loai',
             'trang_thai' => 'required',
         ];
     }
@@ -30,8 +30,8 @@ class ThemDanhMucRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'ten_danh_muc.required' => 'Bạn chưa nhập vào Tên danh mục.',
-            'ten_danh_muc.unique' => 'Danh mục này đã tồn tại, vui lòng điện tên khác!',
+            'ten_the_loai.required' => 'Bạn chưa nhập vào Tên thể loại.',
+            'ten_the_loai.unique' => 'Thể loại này đã tồn tại, vui lòng điện tên khác!',
             
             'trang_thai.required' => 'Bạn chưa nhập vào Trạng thái.'
         ];

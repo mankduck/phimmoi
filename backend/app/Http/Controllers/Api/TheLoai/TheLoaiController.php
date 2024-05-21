@@ -1,26 +1,25 @@
 <?php
 
-namespace App\Http\Controllers\Api\DanhMuc;
+namespace App\Http\Controllers\Api\TheLoai;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Http\Requests\DanhMuc\ThemDanhMucRequest;
 
 // Models
-use App\Models\DanhMuc;
+use App\Models\TheLoai;
 
-class DanhMucController extends Controller
+class TheLoaiController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        // Danh sách Danh mục
-        $danhmucs = DanhMuc::get();
+        // Danh sách Thể loại
+        $theloais = TheLoai::get();
     
         $responseData = [
-            'ds_danhmuc' => $danhmucs,
+            'ds_theloai' => $theloais,
         ];
     
         return response()->json($responseData);
@@ -37,7 +36,7 @@ class DanhMucController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(ThemDanhMucRequest $request)
+    public function store(Request $request)
     {
         //
     }
