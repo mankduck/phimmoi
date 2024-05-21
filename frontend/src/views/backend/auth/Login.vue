@@ -6,6 +6,8 @@ export default {
             currentYear: new Date().getFullYear()
         }
     }
+
+    
 }
 
 </script>
@@ -112,8 +114,8 @@ export default {
                         <!-- end card -->
 
                         <div class="mt-4 text-center">
-                            <p class="mb-0">Don't have an account ? <a href="auth-signup-basic.html"
-                                    class="fw-semibold text-primary text-decoration-underline"> Signup </a> </p>
+                            <p class="mb-0">Don't have an account ? <router-link :to="{ name: 'register' }"
+                                    class="fw-semibold text-primary text-decoration-underline"> Signup </router-link> </p>
                         </div>
 
                     </div>
