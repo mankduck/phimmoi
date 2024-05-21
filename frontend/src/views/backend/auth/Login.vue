@@ -23,8 +23,9 @@ export default {
                 const response = await axios.post(BACKEND_API + 'auth/login', object)           //# tham số nhận vào(url, data, config)
                 console.log(response)
 
-                if (response.data.status == 401) {           //401 là trạng thái được trả về từ bên Controller
-                    console.log(response.data.data.email);
+                if (response.data.status == 401) {           
+                    //401 là trạng thái được trả về từ bên Controller
+                    // console.log(response.data.data.email);
                     this.emailErrorMessage = response.data.data.email
                     this.passwordErrorMessage = response.data.data.password
                 }
@@ -64,7 +65,7 @@ export default {
                                             <label for="username" class="form-label">Email</label>
                                             <input type="text" v-model="email" class="form-control" id="email"
                                                 placeholder="Enter username">
-                                            <span v-if="emailErrorMessage" class="text-danger">{{ emailErrorMessage
+                                            <span v-if="emailErrorMessage" class="text-danger">{{ emailErrorMessage[0]
                                                 }}</span>
                                         </div>
                                         <!-- Xử lý input không dùng name, dùng v-model -->
@@ -86,7 +87,7 @@ export default {
                                                     type="button" id="password-addon"><i
                                                         class="ri-eye-fill align-middle"></i></button> -->
                                                 <span v-if="passwordErrorMessage" class="text-danger">{{
-                                                    passwordErrorMessage }}</span>
+                                                    passwordErrorMessage[0] }}</span>
                                             </div>
                                         </div>
 

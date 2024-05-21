@@ -1,19 +1,17 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\DanhMuc;
 
-use Illuminate\Contracts\Validation\Validator;          //Vì không tự trả lại message như Laravel thường
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Http\Exceptions\HttpResponseException;          //Vì không tự trả lại message như Laravel thường
 
-class AuthRequest extends FormRequest
+class ThemDanhMucRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true;
+        return false;
     }
 
     /**
@@ -24,17 +22,18 @@ class AuthRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => 'required|email',
-            'password' => 'required',
+            'ten_the_loai' => 'required|unique:the_loai',
+            'trang_thai' => 'required',
         ];
     }
 
     public function messages(): array
     {
         return [
-            'email.required' => 'Bạn chưa nhập vào email.',
-            'email.email' => 'Email chưa đúng định dạng. Ví dụ: abc@gmail.com',
-            'password.required' => 'Bạn chưa nhập vào mật khẩu.'
+            'ten_the_loai.required' => 'Bạn chưa nhập vào Tên thể loại.',
+            'ten_the_loai.unique' => 'Thể loại này đã tồn tại, vui lòng điện tên khác!',
+            
+            'trang_thai.required' => 'Bạn chưa nhập vào Trạng thái.'
         ];
     }
 
