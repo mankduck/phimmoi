@@ -41,5 +41,6 @@ Route::prefix('/theloai')->group(function () {
     // Chi tiết Thể loại
     Route::get('/show/{id}', [TheLoaiController::class, 'show']);
 
-    
+    // Xóa Thể loại
+    Route::get('/delete/{id}', [TheLoaiController::class, 'destroy']);
 });

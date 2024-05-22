@@ -36,13 +36,13 @@ const router = createRouter({
     // Phần Thể Loại
 
     {
-      path: '/theloai',
+      path: '/admin/theloai',
       name: 'theloai.index',
       component: () => import('@/views/backend/theloai/IndexTheLoai.vue')
     },
 
     {
-      path: '/user',
+      path: '/admin/user',
       name: 'user.index',
       component: () => import('@/views/backend/users/IndexUser.vue')
     },

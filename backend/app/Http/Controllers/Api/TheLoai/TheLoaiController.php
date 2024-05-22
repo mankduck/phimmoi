@@ -39,14 +39,17 @@ class TheLoaiController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(ThemTheLoaiRequest $request)
+    public function store(Request $request)
     {
         // Thêm Thể loại
-        // $theloais = $request->all();
+        $data_AddTheLoai = [
+            'ten_the_loai' => $request['nameTheLoai'],
+            'trang_thai' => $request['trangThaiTheLoai'],
+            'mo_ta' => $request['moTaTheLoai'],
+        ];
         
-        // return TheLoai::create($theloais);
-
-        return "OK";
+        return TheLoai::create($data_AddTheLoai);
+        
     }
 
     /**
@@ -82,5 +85,6 @@ class TheLoaiController extends Controller
     public function destroy(string $id)
     {
         //
+        TheLoai::destroy($id);
     }
 }
