@@ -112,9 +112,8 @@ function addTheLoai() {
                                                                     aria-label="Default select example"
                                                                     v-model="trangThaiTheLoai">
                                                                     <option selected hidden>--Thể loại--</option>
-                                                                    <option value="1">Đang thịnh hành</option>
-                                                                    <option value="2">Cổ điển</option>
-                                                                    <option value="3">Ưa chuộng</option>
+                                                                    <option value="1">Kích hoạt</option>
+                                                                    <option value="2">Không kích hoạt</option>
                                                                 </select>
                                                             </div>
                                                             <div class="mb-3">
@@ -129,7 +128,7 @@ function addTheLoai() {
                                                             <div>
                                                                 <button type="button" class="btn btn-secondary"
                                                                     data-bs-dismiss="modal">Close</button>
-                                                                <button type="submit" class="btn btn-primary ml-2">Thêm
+                                                                <button type="submit" class="btn btn-primary mx-2">Thêm
                                                                     ngay</button>
                                                             </div>
                                                         </form>

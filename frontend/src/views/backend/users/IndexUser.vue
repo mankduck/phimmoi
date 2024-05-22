@@ -5,8 +5,10 @@ import Layout from '@/components/backend/Layout.vue'
 <template>
     <Layout>
         <template #AdminContent>
-            <div class="row project-wrapper">
-                Đây là Quản Lý User
+            <div class="row">
+                <div class="row">
+                    Đây là Quản Lý User
+                </div>
             </div>
         </template>
     </Layout>
