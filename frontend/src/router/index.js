@@ -33,6 +33,14 @@ const router = createRouter({
       component: Dashboard
     },
 
+    // Phần Thể Loại
+
+    {
+      path: '/theloai',
+      name: 'theloai.index',
+      component: () => import('@/views/backend/theloai/IndexTheLoai.vue')
+    },
+
     {
       path: '/user',
       name: 'user.index',

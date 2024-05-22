@@ -35,6 +35,26 @@
                 <div id="two-column-menu">
                 </div>
                 <ul class="navbar-nav" id="navbar-nav">
+
+                    <li class="nav-item">
+                        <a class="nav-link menu-link" href="#sidebarPagess" data-bs-toggle="collapse" role="button"
+                            aria-expanded="false" aria-controls="sidebarPagess">
+                            <i class="ri-movie-2-line"></i> <span data-key="t-pages">Thể Loại</span>
+                        </a>
+                        <div class="collapse menu-dropdown" id="sidebarPagess">
+                            <ul class="nav nav-sm flex-column">
+                                <li class="nav-item">
+                                    <router-link :to="{ name: 'theloai.index' }" class="nav-link" data-key="t-starter"> QL Thể Loại </router-link>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="" class="nav-link" data-key="t-starter">
+                                        <router-link to="/user"> Thêm Thể Loại </router-link>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+
                     <li class="nav-item">
                         <a class="nav-link menu-link" href="#sidebarPages" data-bs-toggle="collapse" role="button"
                             aria-expanded="false" aria-controls="sidebarPages">
