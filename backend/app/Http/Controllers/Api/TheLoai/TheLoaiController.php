@@ -8,6 +8,9 @@ use Illuminate\Http\Request;
 // Models
 use App\Models\TheLoai;
 
+// Requests
+use App\Http\Requests\TheLoai\ThemTheLoaiRequest;
+
 class TheLoaiController extends Controller
 {
     /**
@@ -36,9 +39,14 @@ class TheLoaiController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ThemTheLoaiRequest $request)
     {
-        //
+        // Thêm Thể loại
+        // $theloais = $request->all();
+        
+        // return TheLoai::create($theloais);
+
+        return "OK";
     }
 
     /**
@@ -46,7 +54,10 @@ class TheLoaiController extends Controller
      */
     public function show(string $id)
     {
-        //
+        // Chi tiết Thể loại
+        $theloai = TheLoai::findOrFail($id);
+        
+        return response()->json($theloai);
     }
 
     /**

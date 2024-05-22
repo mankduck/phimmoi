@@ -32,5 +32,14 @@ Route::prefix('/danhmuc')->group(function () {
 
 // Api Thể loại
 Route::prefix('/theloai')->group(function () {
+    // Danh sách thể loại
     Route::post('', [TheLoaiController::class, 'index']);
+
+    // Danh sách thể loại
+    Route::post('/store', [TheLoaiController::class, 'store']);
+    
+    // Chi tiết Thể loại
+    Route::get('/show/{id}', [TheLoaiController::class, 'show']);
+
+    
 });
