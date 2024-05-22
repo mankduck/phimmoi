@@ -119,9 +119,8 @@ function addTheLoai() {
                                                                     aria-label="Default select example"
                                                                     v-model="theloai.trangthai">
                                                                     <option selected hidden>--Thể loại--</option>
-                                                                    <option value="1">Đang thịnh hành</option>
-                                                                    <option value="2">Cổ điển</option>
-                                                                    <option value="3">Ưa chuộng</option>
+                                                                    <option value="1">Kích hoạt</option>
+                                                                    <option value="2">Không kích hoạt</option>
                                                                 </select>
                                                             </div>
                                                             <div class="mb-3">
