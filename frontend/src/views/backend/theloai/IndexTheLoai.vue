@@ -6,11 +6,11 @@ import axios from 'axios';
 // Khai báo biến cần dùng
 const ds_theloai = ref([]);
 const errors = ref([]);
-const data_addTheLoai = reactive({
-    nameTheLoai: "",
-    trangThaiTheLoai: [],
-    moTaTheLoai: "",
-});
+const theloai = {
+    'name': '',
+    'trangthai': '',
+    'mota': '',
+};
 
 // Tự động chạy
 onMounted(() => {
@@ -36,7 +36,10 @@ function deleteTheLoai(id) {
 
         axios.get(`http://127.0.0.1:8000/api/theloai/delete/${id}`)
             .then(response => {
-                getTheLoai();
+                if(response.status == 200){
+                    alert('Xóa thành công');
+                    getTheLoai();
+                }
             })
             .catch((error) => {
                 console.log(error);
@@ -47,13 +50,17 @@ function deleteTheLoai(id) {
 
 function addTheLoai() {
 
-    axios.post("http://127.0.0.1:8000/api/theloai/store", data_addTheLoai)
+    axios.post("http://127.0.0.1:8000/api/theloai/store", this.theloai)
         .then((response) => {
-            console.log(response);
+            if(response.status == 201){
+                alert("Thêm thành công");
+                getTheLoai();
+            }
         })
         .catch((error) => {
             errors.value = error.response.data.errors;
         });
+
 }
 
 </script>
@@ -103,14 +110,14 @@ function addTheLoai() {
                                                                     class="form-label"><b>Tên thể loại</b></label>
                                                                 <input type="text" class="form-control"
                                                                     id="exampleFormControlInput1"
-                                                                    placeholder="tên thể loại" v-model="nameTheLoai">
+                                                                    placeholder="tên thể loại" v-model="theloai.name">
                                                             </div>
                                                             <div class="mb-3">
                                                                 <label for="exampleFormControlInput1"
                                                                     class="form-label"><b>Trạng thái</b></label>
                                                                 <select class="form-select"
                                                                     aria-label="Default select example"
-                                                                    v-model="trangThaiTheLoai">
+                                                                    v-model="theloai.trangthai">
                                                                     <option selected hidden>--Thể loại--</option>
                                                                     <option value="1">Đang thịnh hành</option>
                                                                     <option value="2">Cổ điển</option>
@@ -123,13 +130,13 @@ function addTheLoai() {
                                                                 <textarea class="form-control"
                                                                     id="exampleFormControlTextarea1" rows="3"
                                                                     placeholder="mô tả"
-                                                                    v-model="moTaTheLoai"></textarea>
+                                                                    v-model="theloai.mota"></textarea>
                                                             </div>
 
                                                             <div>
                                                                 <button type="button" class="btn btn-secondary"
                                                                     data-bs-dismiss="modal">Close</button>
-                                                                <button type="submit" class="btn btn-primary ml-2">Thêm
+                                                                <button type="submit" class="btn btn-primary mx-2">Thêm
                                                                     ngay</button>
                                                             </div>
                                                         </form>
