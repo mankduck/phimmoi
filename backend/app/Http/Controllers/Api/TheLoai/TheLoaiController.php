@@ -60,7 +60,7 @@ class TheLoaiController extends Controller
     {
         // Chi tiết Thể loại
         $theloai = TheLoai::findOrFail($id);
-        
+         
         return response()->json($theloai);
     }
 
