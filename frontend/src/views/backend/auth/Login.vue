@@ -6,7 +6,7 @@ export default {
     data() {        //Khai báo giá trị mặc định cho các trường dữ liệu
         return {
             email: '',     //Khi set giá trị cho email, nó tự động connect với v-model cùng tên
-            password: '',
+            mat_khau: '',
             emailErrorMessage: '',
             passwordErrorMessage: ''
         }
@@ -17,7 +17,7 @@ export default {
 
                 let object = {
                     email: this.email,
-                    password: this.password
+                    mat_khau: this.mat_khau
                 }
 
                 const response = await axios.post(BACKEND_API + 'auth/login', object)           //# tham số nhận vào(url, data, config)
@@ -27,7 +27,7 @@ export default {
                     //401 là trạng thái được trả về từ bên Controller
                     // console.log(response.data.data.email);
                     this.emailErrorMessage = response.data.data.email
-                    this.passwordErrorMessage = response.data.data.password
+                    this.passwordErrorMessage = response.data.data.mat_khau
                 }
 
             } catch (error) {
@@ -63,7 +63,7 @@ export default {
 
                                         <div class="mb-3">
                                             <label for="username" class="form-label">Email</label>
-                                            <input type="text" v-model="email" class="form-control" id="email"
+                                            <input type="text" v-model="email" class="form-control" name="email" id="email"
                                                 placeholder="Enter username">
                                             <span v-if="emailErrorMessage" class="text-danger">{{ emailErrorMessage[0]
                                                 }}</span>
@@ -79,7 +79,7 @@ export default {
                                             </div>
                                             <label class="form-label" for="password-input">Password</label>
                                             <div class="position-relative auth-pass-inputgroup mb-3">
-                                                <input v-model="password" type="password"
+                                                <input v-model="mat_khau" type="password" name="mat_khau"
                                                     class="form-control pe-5 password-input"
                                                     placeholder="Enter password" id="password-input">
                                                 <!-- <button
