@@ -43,7 +43,7 @@ class TheLoaiController extends Controller
     {
         // Thêm Thể loại
         $data_AddTheLoai = [
-            'ten_the_loai' => $request->ten_the_loai,
+            'ten_the_loai' => $request->name,
             'trang_thai' => $request->trangthai,
             'mo_ta' => $request->mota,
         ];
