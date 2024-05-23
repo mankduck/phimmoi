@@ -25,7 +25,7 @@ class AuthRequest extends FormRequest
     {
         return [
             'email' => 'required|email',
-            'password' => 'required',
+            'mat_khau' => 'required',
         ];
     }
 
@@ -34,7 +34,7 @@ class AuthRequest extends FormRequest
         return [
             'email.required' => 'Bạn chưa nhập vào email.',
             'email.email' => 'Email chưa đúng định dạng. Ví dụ: abc@gmail.com',
-            'password.required' => 'Bạn chưa nhập vào mật khẩu.'
+            'mat_khau.required' => 'Bạn chưa nhập vào mật khẩu.'
         ];
     }
 
