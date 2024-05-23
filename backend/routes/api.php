@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\Users\UserCatalogueController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 // Auth
@@ -8,6 +9,7 @@ use App\Http\Controllers\Api\V1\AuthController;
 use App\Http\Controllers\Api\DanhMuc\DanhMucController;
 // DanhMuc
 use App\Http\Controllers\Api\TheLoai\TheLoaiController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -34,16 +36,22 @@ Route::prefix('/danhmuc')->group(function () {
 Route::prefix('/theloai')->group(function () {
     // Danh sách thể loại
     Route::post('', [TheLoaiController::class, 'index']);
-
     // Thêm thể loại
     Route::post('/store', [TheLoaiController::class, 'store']);
-    
     // Chi tiết Thể loại
     Route::get('/show/{id}', [TheLoaiController::class, 'show']);
-
     // Chi tiết Thể loại
     Route::post('/update/{id}', [TheLoaiController::class, 'update']);
-
     // Xóa Thể loại
     Route::get('/delete/{id}', [TheLoaiController::class, 'destroy']);
+});
+
+
+// Api Thể loại
+Route::prefix('/nhom-tai-khoan')->group(function () {
+    Route::post('', [UserCatalogueController::class, 'index']);
+    Route::post('/store', [UserCatalogueController::class, 'store']);
+    Route::get('/show/{id}', [UserCatalogueController::class, 'show']);
+    Route::post('/update/{id}', [UserCatalogueController::class, 'update']);
+    Route::get('/delete/{id}', [UserCatalogueController::class, 'destroy']);
 });

@@ -46,6 +46,22 @@ const router = createRouter({
       name: 'user.index',
       component: () => import('@/views/backend/users/IndexUser.vue')
     },
+
+    // Phần Thể Loại
+
+    {
+      path: '/admin/nhom-tai-khoan',
+      name: 'nhom-tai-khoan.index',
+      component: () => import('@/views/backend/users/IndexUser.vue')
+    },
+
+    {
+      path: '/admin/user',
+      name: 'user.index',
+      component: () => import('@/views/backend/users/IndexUser.vue')
+    },
+
+
   ]
 })
 
