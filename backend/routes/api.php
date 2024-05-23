@@ -35,11 +35,14 @@ Route::prefix('/theloai')->group(function () {
     // Danh sách thể loại
     Route::post('', [TheLoaiController::class, 'index']);
 
-    // Danh sách thể loại
+    // Thêm thể loại
     Route::post('/store', [TheLoaiController::class, 'store']);
     
     // Chi tiết Thể loại
     Route::get('/show/{id}', [TheLoaiController::class, 'show']);
+
+    // Chi tiết Thể loại
+    Route::post('/update/{id}', [TheLoaiController::class, 'update']);
 
     // Xóa Thể loại
     Route::get('/delete/{id}', [TheLoaiController::class, 'destroy']);

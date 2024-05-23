@@ -43,7 +43,7 @@ class TheLoaiController extends Controller
     {
         // Thêm Thể loại
         $data_AddTheLoai = [
-            'ten_the_loai' => $request->name,
+            'ten_the_loai' => $request->ten_the_loai,
             'trang_thai' => $request->trangthai,
             'mo_ta' => $request->mota,
         ];
@@ -59,9 +59,9 @@ class TheLoaiController extends Controller
     public function show(string $id)
     {
         // Chi tiết Thể loại
-        $theloai = TheLoai::findOrFail($id);
+        $chitiet_theloai = TheLoai::findOrFail($id);
          
-        return response()->json($theloai);
+        return response()->json($chitiet_theloai);
     }
 
     /**
@@ -77,7 +77,15 @@ class TheLoaiController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        // Cập nhật
+        $data = [
+            'ten_the_loai' => $request->ten_the_loai,
+            'trang_thai' => $request->trang_thai,
+            'mo_ta' => $request->mo_ta,
+        ];
+
+        TheLoai::where('id', $request->id)
+            ->update($data);
     }
 
     /**

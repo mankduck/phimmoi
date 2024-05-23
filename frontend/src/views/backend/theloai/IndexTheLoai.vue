@@ -1,15 +1,20 @@
 <script setup>
-import Layout from '@/components/backend/Layout.vue'
+import Layout from "@/components/backend/Layout.vue";
 import { ref, onMounted, reactive } from "vue";
-import axios from 'axios';
+import axios from "axios";
 
 // Khai báo biến cần dùng
 const ds_theloai = ref([]);
+const chitiet_theloai = ref({
+    ten_the_loai: "",
+    trang_thai: "",
+    mo_ta: "",
+});
 const errors = ref([]);
 const theloai = {
-    'name': '',
-    'trangthai': '',
-    'mota': '',
+    name: "",
+    trangthai: "",
+    mota: "",
 };
 
 // Tự động chạy
@@ -18,11 +23,10 @@ onMounted(() => {
 });
 
 const getTheLoai = () => {
-    axios.post('http://127.0.0.1:8000/api/theloai')
+    axios
+        .post("http://127.0.0.1:8000/api/theloai")
         .then((response) => {
             ds_theloai.value = response.data.ds_theloai;
-
-            // console.log(ds_theloai.value);
         })
         .catch((error) => {
             console.log(error);
@@ -30,29 +34,28 @@ const getTheLoai = () => {
 };
 
 function deleteTheLoai(id) {
-    const confirmDelete = window.confirm('Bạn thực sự muốn xóa !!');
+    const confirmDelete = window.confirm("Bạn thực sự muốn xóa !!");
 
     if (confirmDelete) {
-
-        axios.get(`http://127.0.0.1:8000/api/theloai/delete/${id}`)
-            .then(response => {
-                if(response.status == 200){
-                    alert('Xóa thành công');
+        axios
+            .get(`http://127.0.0.1:8000/api/theloai/delete/${id}`)
+            .then((response) => {
+                if (response.status == 200) {
+                    alert("Xóa thành công");
                     getTheLoai();
                 }
             })
             .catch((error) => {
                 console.log(error);
             });
-
     }
 }
 
 function addTheLoai() {
-
-    axios.post("http://127.0.0.1:8000/api/theloai/store", this.theloai)
+    axios
+        .post("http://127.0.0.1:8000/api/theloai/store", this.theloai)
         .then((response) => {
-            if(response.status == 201){
+            if (response.status == 201) {
                 alert("Thêm thành công");
                 getTheLoai();
             }
@@ -60,7 +63,33 @@ function addTheLoai() {
         .catch((error) => {
             errors.value = error.response.data.errors;
         });
+}
 
+function editTheLoai(id) {
+    axios
+        .get(`http://127.0.0.1:8000/api/theloai/show/${id}`)
+        .then((response) => {
+            if (response.status == 200) {
+                chitiet_theloai.value = response.data;
+            }
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+}
+
+function updateTheLoai(id) {
+    axios
+        .post(`http://127.0.0.1:8000/api/theloai/update/${id}`, this.chitiet_theloai)
+        .then((response) => {
+            if(response.status == 200){
+                alert("Chỉnh sửa thành công!");
+                getTheLoai();
+            }
+        })
+        .catch((error) => {
+            console.log(error);
+        });
 }
 
 </script>
@@ -86,19 +115,20 @@ function addTheLoai() {
                                             <i class="ri-delete-bin-2-line"></i>
                                         </button>
                                         <!-- Button trigger modal -->
-                                        <button type="button" class="btn btn-primary " data-bs-toggle="modal"
+                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                             data-bs-target="#exampleModal">
-                                            <i class="ri-add-line align-bottom me-1"></i> Thêm Thể Loại
+                                            <i class="ri-add-line align-bottom me-1"></i> Thêm Thể
+                                            Loại
                                         </button>
 
-                                        <!-- Modal -->
+                                        <!-- Modal thêm -->
                                         <div class="modal fade" id="exampleModal" tabindex="-1"
                                             aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-centered">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h1 class="modal-title fs-5" id="exampleModalLabel"><b>Thêm Thể
-                                                                Loại</b>
+                                                        <h1 class="modal-title fs-5" id="exampleModalLabel">
+                                                            <b>Thêm Thể Loại</b>
                                                         </h1>
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                             aria-label="Close"></button>
@@ -110,7 +140,7 @@ function addTheLoai() {
                                                                     class="form-label"><b>Tên thể loại</b></label>
                                                                 <input type="text" class="form-control"
                                                                     id="exampleFormControlInput1"
-                                                                    placeholder="tên thể loại" v-model="theloai.name">
+                                                                    placeholder="tên thể loại" v-model="theloai.name" />
                                                             </div>
                                                             <div class="mb-3">
                                                                 <label for="exampleFormControlInput1"
@@ -118,7 +148,9 @@ function addTheLoai() {
                                                                 <select class="form-select"
                                                                     aria-label="Default select example"
                                                                     v-model="theloai.trangthai">
-                                                                    <option selected hidden>--Thể loại--</option>
+                                                                    <option value="" selected>
+                                                                        --Thể loại--
+                                                                    </option>
                                                                     <option value="1">Kích hoạt</option>
                                                                     <option value="2">Không kích hoạt</option>
                                                                 </select>
@@ -134,9 +166,12 @@ function addTheLoai() {
 
                                                             <div>
                                                                 <button type="button" class="btn btn-secondary"
-                                                                    data-bs-dismiss="modal">Close</button>
-                                                                <button type="submit" class="btn btn-primary mx-2">Thêm
-                                                                    ngay</button>
+                                                                    data-bs-dismiss="modal">
+                                                                    Close
+                                                                </button>
+                                                                <button type="submit" class="btn btn-primary mx-2">
+                                                                    Thêm ngay
+                                                                </button>
                                                             </div>
                                                         </form>
                                                     </div>
@@ -167,21 +202,85 @@ function addTheLoai() {
                                                 <td>{{ theloai.mo_ta }}</td>
                                                 <td>
                                                     <span v-if="theloai.trang_thai === 1"
-                                                        class="badge text-bg-success">Đang thịnh
-                                                        hành</span>
-                                                    <span v-if="theloai.trang_thai === 2" class="badge text-bg-info">Cổ
-                                                        điển</span>
-                                                    <span v-if="theloai.trang_thai === 3"
-                                                        class="badge text-bg-secondary">Ưa chuộng</span>
+                                                        class="badge text-bg-success w-75">Kích hoạt</span>
+                                                    <span v-if="theloai.trang_thai === 2"
+                                                        class="badge text-bg-info w-75">Không kích hoạt</span>
                                                 </td>
                                                 <td>
-                                                    <button type="button" class="btn btn-primary w-25">Sửa</button>
+                                                    <button @click="editTheLoai(theloai.id)" type="button"
+                                                        class="btn btn-primary w-25" data-bs-toggle="modal"
+                                                        data-bs-target="#exampleModal1">
+                                                        Sửa
+                                                    </button>
                                                     <button @click="deleteTheLoai(theloai.id)" type="button"
-                                                        class="btn btn-danger mx-2 w-25">Xóa</button>
+                                                        class="btn btn-danger mx-2 w-25">
+                                                        Xóa
+                                                    </button>
                                                 </td>
                                             </tr>
                                         </tbody>
                                     </table>
+                                    <!-- Modal sửa -->
+                                    <div class="modal fade" id="exampleModal1" tabindex="-1"
+                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">
+                                                        <b>Sửa Thể Loại</b>
+                                                    </h1>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                                </div>
+
+                                                <div class="modal-body">
+                                                    <form @submit.prevent="updateTheLoai(chitiet_theloai.id)">
+                                                        <div class="mb-3">
+                                                            <label for="exampleFormControlInput1"
+                                                                class="form-label"><b>Tên thể loại</b></label>
+                                                            <input type="text" class="form-control"
+                                                                id="exampleFormControlInput1"
+                                                                v-model="chitiet_theloai.ten_the_loai" />
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="exampleFormControlInput1"
+                                                                class="form-label"><b>Trạng thái</b></label>
+                                                            <select class="form-select"
+                                                                aria-label="Default select example"
+                                                                v-model="chitiet_theloai.trang_thai">
+                                                                <option value="1"
+                                                                    :selected="chitiet_theloai.trang_thai == 1">
+                                                                    Kích hoạt
+                                                                </option>
+                                                                <option value="2"
+                                                                    :selected="chitiet_theloai.trang_thai == 2">
+                                                                    Không kích hoạt
+                                                                </option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="exampleFormControlTextarea1"
+                                                                class="form-label"><b>Mô tả</b></label>
+                                                            <textarea class="form-control"
+                                                                id="exampleFormControlTextarea1" rows="3"
+                                                                placeholder="mô tả"
+                                                                v-model="chitiet_theloai.mo_ta"></textarea>
+                                                        </div>
+
+                                                        <div>
+                                                            <button type="button" class="btn btn-secondary"
+                                                                data-bs-dismiss="modal">
+                                                                Close
+                                                            </button>
+                                                            <button type="submit" class="btn btn-primary mx-2">
+                                                                Sửa ngay
+                                                            </button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="d-flex justify-content-end mt-3">
                                     <div class="pagination-wrap hstack gap-2">
@@ -189,9 +288,7 @@ function addTheLoai() {
                                             Previous
                                         </a>
                                         <ul class="pagination listjs-pagination mb-0"></ul>
-                                        <a class="page-item pagination-next" href="#">
-                                            Next
-                                        </a>
+                                        <a class="page-item pagination-next" href="#"> Next </a>
                                     </div>
                                 </div>
                             </div>
