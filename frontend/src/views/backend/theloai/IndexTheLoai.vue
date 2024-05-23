@@ -98,7 +98,7 @@ function updateTheLoai(id) {
             }
         })
         .catch((error) => {
-            console.log(error);
+            alert("Bạn hãy nhập đầy đủ trường")
         });
 }
 
