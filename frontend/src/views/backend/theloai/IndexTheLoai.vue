@@ -58,6 +58,11 @@ function addTheLoai() {
             if (response.status == 201) {
                 alert("Thêm thành công");
                 getTheLoai();
+                this.theloai = {
+                    name: "",
+                    trangthai: "",
+                    mota: "",
+                }
             }
         })
         .catch((error) => {
@@ -82,9 +87,14 @@ function updateTheLoai(id) {
     axios
         .post(`http://127.0.0.1:8000/api/theloai/update/${id}`, this.chitiet_theloai)
         .then((response) => {
-            if(response.status == 200){
+            if (response.status == 200) {
                 alert("Chỉnh sửa thành công!");
                 getTheLoai();
+                this.chitiet_theloai = {
+                    ten_the_loai: "",
+                    trang_thai: "",
+                    mo_ta: "",
+                };
             }
         })
         .catch((error) => {
