@@ -1,12 +1,12 @@
 <script>
-import axios from 'axios';
+import axios from '@/config/axios.js';
 import { BACKEND_API } from '@/config/constant';
 
 export default {
     data() {        //Khai báo giá trị mặc định cho các trường dữ liệu
         return {
             email: '',     //Khi set giá trị cho email, nó tự động connect với v-model cùng tên
-            mat_khau: '',
+            password: '',
             emailErrorMessage: '',
             passwordErrorMessage: ''
         }
@@ -17,17 +17,17 @@ export default {
 
                 let object = {
                     email: this.email,
-                    mat_khau: this.mat_khau
+                    password: this.password
                 }
 
                 const response = await axios.post(BACKEND_API + 'auth/login', object)           //# tham số nhận vào(url, data, config)
                 console.log(response)
 
-                if (response.data.status == 401) {           
+                if (response.status == 401) {
                     //401 là trạng thái được trả về từ bên Controller
                     // console.log(response.data.data.email);
-                    this.emailErrorMessage = response.data.data.email
-                    this.passwordErrorMessage = response.data.data.mat_khau
+                    this.emailErrorMessage = response.data.email
+                    this.passwordErrorMessage = response.data.password
                 }
 
             } catch (error) {
@@ -63,8 +63,8 @@ export default {
 
                                         <div class="mb-3">
                                             <label for="username" class="form-label">Email</label>
-                                            <input type="text" v-model="email" class="form-control" name="email" id="email"
-                                                placeholder="Enter username">
+                                            <input type="text" v-model="email" class="form-control" name="email"
+                                                id="email" placeholder="Enter username">
                                             <span v-if="emailErrorMessage" class="text-danger">{{ emailErrorMessage[0]
                                                 }}</span>
                                         </div>
@@ -79,7 +79,7 @@ export default {
                                             </div>
                                             <label class="form-label" for="password-input">Password</label>
                                             <div class="position-relative auth-pass-inputgroup mb-3">
-                                                <input v-model="mat_khau" type="password" name="mat_khau"
+                                                <input v-model="password" type="password" name="password"
                                                     class="form-control pe-5 password-input"
                                                     placeholder="Enter password" id="password-input">
                                                 <!-- <button

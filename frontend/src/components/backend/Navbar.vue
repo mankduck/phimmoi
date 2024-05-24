@@ -51,9 +51,11 @@
                         <div class="collapse menu-dropdown" id="sidebarPages">
                             <ul class="nav nav-sm flex-column">
                                 <li class="nav-item">
-                                    <a href="pages-starter.html" class="nav-link" data-key="t-starter"> QL Nhóm
-                                        Tài
-                                        Khoản </a>
+                                    <a href="" class="nav-link" data-key="t-starter">
+                                        <router-link :to="{ name: 'nhom-tai-khoan.index' }">
+                                            QL Nhóm Tài Khoản
+                                        </router-link>
+                                    </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="" class="nav-link" data-key="t-starter">

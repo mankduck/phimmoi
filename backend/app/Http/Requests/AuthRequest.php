@@ -25,7 +25,7 @@ class AuthRequest extends FormRequest
     {
         return [
             'email' => 'required|email',
-            'mat_khau' => 'required',
+            'password' => 'required',
         ];
     }
 
@@ -34,7 +34,7 @@ class AuthRequest extends FormRequest
         return [
             'email.required' => 'Bạn chưa nhập vào email.',
             'email.email' => 'Email chưa đúng định dạng. Ví dụ: abc@gmail.com',
-            'mat_khau.required' => 'Bạn chưa nhập vào mật khẩu.'
+            'password.required' => 'Bạn chưa nhập vào mật khẩu.'
         ];
     }
 
@@ -42,11 +42,11 @@ class AuthRequest extends FormRequest
     public function failedValidation(Validator $validator)
     {
         throw new HttpResponseException(response()->json([
-            'status' => 401,           
+            'status' => 401,
             //Trả về mã lỗi 401
             // 'message' => 'Validation error',
             'data' => $validator->errors()
-        ]));        
+        ]));
         //Dùng để trả lại lỗi khi status = 401 và message là validation error
 
     }
