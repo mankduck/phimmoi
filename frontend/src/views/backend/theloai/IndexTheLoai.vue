@@ -66,7 +66,7 @@ function addTheLoai() {
             }
         })
         .catch((error) => {
-            errors.value = error.response.data.errors;
+            alert("Bạn hãy nhập đầy đủ trường");
         });
 }
 
@@ -98,7 +98,7 @@ function updateTheLoai(id) {
             }
         })
         .catch((error) => {
-            alert("Bạn hãy nhập đầy đủ trường")
+            alert("Bạn hãy nhập đầy đủ trường");
         });
 }
 
