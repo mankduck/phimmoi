@@ -30,7 +30,7 @@ async function getNhomTk() {
 
 async function addNhomTk() {
     await add('nhom-tai-khoan')
-};
+}
 const editNhomTk = async (id) => {
     try {
         const response = await axios.get(`http://127.0.0.1:8000/api/nhom-tai-khoan/show/${id}`);

@@ -14,6 +14,7 @@ export async function get(url = '') {
 export async function add(url = '') {
     try {
         const response = await axios.post(`http://127.0.0.1:8000/api/${url}/store`);
+        console.log(response);
         if (response.status === 201) {
             alert("Thêm thành công");
             // await getNhomTk();

@@ -37,14 +37,14 @@ class UserCatalogueController extends Controller
     public function store(Request $request)
     {
         // Thêm Thể loại
-        $data_AddTheLoai = [
-            'ten_the_loai' => $request->name,
+        $data_AddNhomTk = [
+            'ten_nhom' => $request->name,
             'trang_thai' => $request->trangthai,
             'mo_ta' => $request->mota,
         ];
 
 
-        return UserCatalogue::create($data_AddTheLoai);
+        return UserCatalogue::create($data_AddNhomTk);
 
     }
 
