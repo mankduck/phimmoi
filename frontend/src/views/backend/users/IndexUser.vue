@@ -13,11 +13,11 @@ const chitiet_nhomTk = ref({
     mo_ta: "",
 });
 const errors = ref([])
-const theloai = {
-    ten_nhom: "",
+const nhomTK = ref({
+    name: "",
     trangthai: "",
     mota: "",
-}
+})
 
 // Tự động chạy
 onMounted(() => {
@@ -28,8 +28,21 @@ async function getNhomTk() {
     ds_nhomTk.value = response.ds_nhomTk
 }
 
-async function addNhomTk() {
-    await add('nhom-tai-khoan')
+const addNhomTk = async () => {
+    try {
+        const response = await axios.post(`http://127.0.0.1:8000/api/nhom-tai-khoan/store`, nhomTK.value)
+        if (response.status === 201) {
+            alert("Thêm thành công");
+            await getNhomTk()
+            nhomTK.value = {
+                name: "",
+                trangthai: "",
+                mota: ""
+            }
+        }
+    } catch (error) {
+        console.error(error);
+    }
 }
 const editNhomTk = async (id) => {
     try {
@@ -50,11 +63,11 @@ const updateNhomTk = async (id) => {
             await getNhomTk(); // Gọi hàm này để cập nhật danh sách (nếu cần await)
             isModalOpen.value = false; // Đóng popup
             console.log(12314);
-            // chitiet_nhomTk.value = {
-            //     ten_nhom: "",
-            //     trang_thai: "",
-            //     mo_ta: "",
-            // };
+            chitiet_nhomTk.value = {
+                ten_nhom: "",
+                trang_thai: "",
+                mo_ta: "",
+            };
         }
     } catch (error) {
         console.log(error);
@@ -123,13 +136,14 @@ const deleteTheLoai = async (id) => {
                                                                     class="form-label"><b>Tên Nhóm</b></label>
                                                                 <input type="text" class="form-control"
                                                                     id="exampleFormControlInput1"
-                                                                    placeholder="tên thể loại" />
+                                                                    placeholder="tên thể loại" v-model="nhomTK.name" />
                                                             </div>
                                                             <div class="mb-3">
                                                                 <label for="exampleFormControlInput1"
                                                                     class="form-label"><b>Trạng thái</b></label>
                                                                 <select class="form-select"
-                                                                    aria-label="Default select example">
+                                                                    aria-label="Default select example"
+                                                                    v-model="nhomTK.trangthai">
                                                                     <option value="" selected>
                                                                         --Thể loại--
                                                                     </option>
@@ -142,7 +156,8 @@ const deleteTheLoai = async (id) => {
                                                                     class="form-label"><b>Mô tả</b></label>
                                                                 <textarea class="form-control"
                                                                     id="exampleFormControlTextarea1" rows="3"
-                                                                    placeholder="mô tả"></textarea>
+                                                                    placeholder="mô tả"
+                                                                    v-model="nhomTK.mota"></textarea>
                                                             </div>
 
                                                             <div>
@@ -178,7 +193,7 @@ const deleteTheLoai = async (id) => {
                                         </thead>
                                         <tbody>
                                             <tr v-for="nhomTk in ds_nhomTk" :key="nhomTk.id">
-                                                <td>#{{ nhomTk.id }}</td>
+                                                <td width="100px">#{{ nhomTk.id }}</td>
                                                 <td>{{ nhomTk.ten_nhom }}</td>
                                                 <td>{{ nhomTk.mo_ta }}</td>
                                                 <td>
@@ -253,8 +268,7 @@ const deleteTheLoai = async (id) => {
                                                                 data-bs-dismiss="modal">
                                                                 Close
                                                             </button>
-                                                            <button type="submit" :class="{ 'show': isModalOpen }"
-                                                                class="btn btn-primary mx-2">
+                                                            <button type="submit" class="btn btn-primary mx-2">
                                                                 Sửa ngay
                                                             </button>
                                                         </div>
